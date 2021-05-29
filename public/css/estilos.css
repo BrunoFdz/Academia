@@ -1,0 +1,191 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin-bottom: 40px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+/*Botones en general*/
+
+.btn {
+  background-color: #6C63FF;
+  border-color: #6C63FF;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #5F46FC;
+  border-color: #5F46FC;
+  color: white;
+}
+
+/*Enlaces del footer*/
+
+footer a:hover {
+  color: #5F46FC;
+}
+
+/* Enlaces */
+
+a {
+  color: #6C63FF;
+}
+
+a:hover {
+  color: #6C63FF;
+}
+
+/*PÁGINA DE INICIO*/
+
+/*Imagenes del carrousel*/
+
+.imgnormalizada {
+  width: 100%;
+  height: 65vh;
+  max-height: 65vh;
+}
+
+/*Quienes somos*/
+
+.sobre-nosotros {
+  font-size: 18px;
+}
+
+/*Alguno de nuestros cursos*/
+
+.carta {
+  height: 475px;
+}
+
+.carta img {
+  height: 250px;
+}
+
+/*PÁGINA DE CURSOS*/
+
+/*Nuestros cursos*/
+
+.nav-pills>.active {
+  background-color: #6C63FF !important;
+}
+
+.nav-pills>a {
+  color: black;
+}
+
+/*PÁGINA DE LOGIN*/
+
+/* Panel general de login*/
+
+.login_general {
+  height: 425px;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+}
+
+/* Parte izquierda del login*/
+
+.login_logo {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+/* Parte derecha del login */
+
+.login_form {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Inputs del login */
+
+.form_input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #aaa;
+  padding: 1em .5em .5em 2em;
+  outline: none;
+  margin: 1.5em auto;
+  transition: all 0.5s;
+}
+
+.form_input:focus {
+  border-bottom-color: #6C63FF;
+  box-shadow: 0 0 5px rgba(0, 80, 80, .4);
+  border-radius: 4px;
+}
+
+/* Botón del login*/
+
+.btn-submit {
+  width: 100%;
+  border-radius: 30px;
+}
+
+/*Cuándo la pantalla es de 768 el logo desaparece y se añaden los bordes faltantes al lado derecho*/
+
+@media screen and (max-width: 768px) {
+  .login_form {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-left: 1px solid #ccc;
+  }
+}
+
+/*FORMULARIOS*/
+
+label.error {
+    color: red;
+    font-size: 1rem;
+    display: block;
+    margin-top: 5px;
+}
+
+input.error {
+    border: 1px solid red;
+    font-weight: 300;
+    color: red;
+}
+
+/*Errores de los formularios para php y enlaces eliminar*/
+.errorFormulario{
+    color: red;
+}
+
+a.peligro{
+    color: red;
+}
+
+/*Contacto*/
+
+.contacto{
+  border: solid 1px #6C63FF;
+}
+
+.contacto i{
+  color: #6C63FF;
+}
+
+.contacto a i:hover{
+  color: #5F46FC;
+}
