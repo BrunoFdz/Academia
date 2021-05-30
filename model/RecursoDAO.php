@@ -1,7 +1,20 @@
 <?php
 
+/**
+ * 
+ * Esta clase nos permitirá realizar las diferentes operaciones referente 
+ * a la tabla de recursos con la base de datos
+ * 
+ */
 class RecursoDAO extends BaseDAO {
 
+    /**
+     * Constructor de la clase
+     * 
+     * Establece los atributos heredados de la BaseDAO para hacer referencia 
+     * a la tabla recursos y a la clase Recurso. Además obtiene la conexión con la 
+     * base de datos
+     */    
     public function __construct() {
         try {
             $this->table = "recursos";
@@ -12,9 +25,19 @@ class RecursoDAO extends BaseDAO {
         }
     }
 
-    //Los recursos no pueden ser actualizados, habría que eliminarlos y volverlos a subir
+    /**
+     * Los recursos no pueden ser actualizados, habría que eliminarlos y volverlos a subir
+     * por lo que este método no hace nada
+     * 
+     * @ignore
+     */
     public function update($recurso) {}
 
+    /**
+     * Método utilizado para añadir los datos de un recurso en la base de datos
+     * 
+     * @param Recurso $recurso recurso que queremos añadir
+     */
     public function add($recurso) {
         try {           
             $sql = "INSERT INTO recursos (nombre, tipo_mime, tema_id) VALUES (?, ?, ?)";
@@ -24,8 +47,12 @@ class RecursoDAO extends BaseDAO {
         }
     }
     
-    //Método para mostrar una lista de recursos pertenecientes a un tema
-    // Recibe el id del tema y devuelve un array con los recursos
+    /**
+     * Método utilizado para obtener una lista de recursos de un tema
+     * 
+     * @param $idTema id del tema del que queremos obtener los recursos
+     * @return array de objetos del tipo recurso
+     */
     public function listarRecursosTema($idTema) {
         try {
             $sql = "SELECT * FROM recursos where tema_id= ?";

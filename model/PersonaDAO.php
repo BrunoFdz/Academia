@@ -1,7 +1,20 @@
 <?php
 
+/**
+ * 
+ * Esta clase nos permitirá realizar las diferentes operaciones referente 
+ * a las tablas de personas y usuarios con la base de datos
+ * 
+ */
 class PersonaDAO extends BaseDAO {
 
+    /**
+     * Constructor de la clase
+     * 
+     * Establece los atributos heredados de la BaseDAO para hacer referencia 
+     * a la tabla personas y a la clase Persona. Además obtiene la conexión con la 
+     * base de datos
+     */
     public function __construct() {
         try {
             $this->table = "personas";
@@ -12,6 +25,11 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
+    /**
+     * Método utilizado para obtener todos los datos de todos los usuarios 
+     * 
+     * @return array de objetos con los datos de las tablas personas y usuarios
+     */
     public function listarUsuarios() {
         try {
             $stm = $this->pdo->prepare("SELECT * FROM personas INNER JOIN usuarios using(id)");
@@ -23,6 +41,11 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
+    /**
+     * Método utilizado para obtener todos los datos de los usuarios que son profesores
+     * 
+     * @return array de objetos con los datos de las tablas personas y usuarios de los profesores
+     */
     public function listarProfesores() {
         try {
             $stm = $this->pdo->prepare("SELECT * FROM personas INNER JOIN usuarios using(id) where rol = 'profesor'");
@@ -34,6 +57,11 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
+    /**
+     * Método utilizado para obtener todos los datos de los usuarios que son alumnos
+     * 
+     * @return array de objetos con los datos de las tablas personas y usuarios de los alumnos
+     */
     public function listarAlumnos() {
         try {
             $stm = $this->pdo->prepare("SELECT * FROM personas INNER JOIN usuarios using(id) where rol = 'alumno'");
@@ -45,6 +73,11 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
+    /**
+     * Método utilizado para añadir los datos de una persona en la base de datos
+     * 
+     * @param Persona $persona
+     */
     public function add($persona) {
         try {
             $sql = "INSERT INTO personas(nombre, apellidos, correo) VALUES (?,?,?)";
@@ -76,6 +109,11 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
+    /**
+     * Método utilizado para actualizar los datos de una persona en la base de datos
+     * 
+     * @param Persona $persona
+     */
     public function update($persona) {
         try {
             $sql = "UPDATE personas SET nombre = ?, apellidos = ?, correo = ? WHERE id = ? ";
@@ -108,7 +146,11 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
-    //Método que obtiene todos los datos de un usuario por su id (los datos de la tabla persona y de la tabla usuarios)
+    /**
+     * Método utilizado para obtener todos los datos de las tablas persona y usuario de la base de datos de una persona por su id 
+     * 
+     * @param $id id de la persona de la que queremos obtener sus datos
+     */
     public function obtenerDatosId($id) {
         try {
             $stm = $this->pdo->prepare("SELECT * FROM personas INNER JOIN usuarios using(id) WHERE id = ?");
@@ -119,8 +161,12 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
-    //Comprobar si un email esta disponible
-    //Recibe un email como argumento y comprueba si ya existe ese email, si existe devuelve false
+    /**
+     * Método utilizado para comprobar si un email está disponible 
+     * 
+     * @param $email
+     * @return boolean devuelve falso si el email ya esta siendo utilizado y true si está libre
+     */
     public function comprobarEmail($email) {
         try {
             $query = "SELECT correo FROM personas WHERE correo=:email";
@@ -138,8 +184,12 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
-    //Comprobar si un nombre de usuario esta disponible
-    //Recibe un nombre de usuario como argumento y comprueba si ya existe, si existe devuelve false
+    /**
+     * Método utilizado para comprobar si un nombre de usuario está disponible 
+     * 
+     * @param $nombreUsuario
+     * @return boolean devuelve falso si el nombre de usuario ya esta siendo utilizado y true si está libre 
+     */
     public function comprobarNombreUsuario($nombreUsuario) {
         try {
             $query = "SELECT nombre_usuario FROM usuarios WHERE nombre_usuario=:nombreUsuario";
@@ -157,22 +207,30 @@ class PersonaDAO extends BaseDAO {
         }
     }
 
-    //Método para actualizar la password de un usuario
-    //Por parámetro recibe un objeto del tipo Usuario
+    /**
+     * Método utilizado para actualizar la contraseña de un usuario
+     * 
+     * @param Usuario $usuario objeto del tipo usuario con los datos del usuario
+     */
     public function actualizarPassword($usuario) {
-        try{
-            
+        try {
+
             $sql = "UPDATE usuarios SET password = ? where id = ?";
-            $this->pdo->prepare($sql)->execute(array($usuario->getPassword(),$usuario->getId()));
-            
+            $this->pdo->prepare($sql)->execute(array($usuario->getPassword(), $usuario->getId()));
         } catch (Exception $ex) {
             die($e->getMessage());
         }
     }
-    
+
     //Método para obtener un listado de alumnos que asisten a un curso
     //Por parámetro recibe el id del curso
-        public function listarAlumnosCurso($idCurso) {
+    /**
+     * Método utilizado para obtener un listado de alumnos que asisten a un curso
+     * 
+     * @param type $idCurso id del curso del que queremos obtener los alumnos
+     * @return array de personas que asisten al curso
+     */
+    public function listarAlumnosCurso($idCurso) {
         try {
             $sql = "SELECT personas.nombre, personas.apellidos, personas.correo FROM personas "
                     . "INNER JOIN curso_alumno on personas.id=curso_alumno.alumno_id "

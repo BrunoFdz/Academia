@@ -7,6 +7,11 @@
  */
 class Database
 {
+    /**
+     * Método utilizado para conectarse a la base de datos
+     * 
+     * @return devuelve la conexión con la base de datos
+     */
     public static function connect()
     {
         $pdo = new PDO('mysql:host=localhost;dbname=academia;charset=utf8', 'root', '');

@@ -3,8 +3,11 @@
 /**
  * Clase baseDAO, es una clase abstracta, padre del resto de clases DAO
  * 
- * Esta clase se utilizada para recopilar los métodos comúnes entre todas 
- * las clases DAO de la aplicación
+ * Esta clase es utilizada para recopilar los métodos comúnes entre todas 
+ * las clases DAO de la aplicación. Esta clase nos permitirá realizar
+ * las diferentes operaciones con la base de datos
+ * 
+ * @abstract
  */
 abstract class BaseDAO {
 
@@ -71,7 +74,7 @@ abstract class BaseDAO {
      * Método abstracto para que las clases hijas lo hereden y servirá para 
      * añadir un registro a la base de datos
      * 
-     * @param Object Se le pasa un objeto de la clase referente a la tabla en 
+     * @param Object Objeto de la clase referente a la tabla en 
      * la base de datos
      */
     abstract public function add($objeto);
@@ -80,7 +83,7 @@ abstract class BaseDAO {
      * Método abstracto para que las clases hijas lo hereden y servirá para 
      * actualizar un registro a la base de datos
      *      
-     * @param Object Se le pasa un objeto de la clase referente a la tabla en 
+     * @param Object Objeto de la clase referente a la tabla en 
      * la base de datos
      */
     abstract public function update($objeto);
