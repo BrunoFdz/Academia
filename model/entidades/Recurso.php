@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Clase recurso que representa la tabla de recursos en la base de datos
+ * 
+ * Esta clase de recurso representa la tabla de recursos en la base de datos
+ * y se utiliza en la aplicación para trabajar con POO
+ */
+
 class Recurso {
     
     private $id;

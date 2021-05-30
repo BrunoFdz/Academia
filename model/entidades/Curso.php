@@ -1,4 +1,10 @@
 <?php
+/**
+ * Clase curso que representa la tabla de cursos en la base de datos
+ * 
+ * Esta clase de curso representa la tabla de cursos en la base de datos
+ * y se utiliza en la aplicación para trabajar con POO
+ */
 
 class Curso {
     private $id;

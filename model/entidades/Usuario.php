@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Clase usuario que representa la tabla de usuarios en la base de datos
+ * 
+ * Esta clase de usuario representa la tabla de cursos en la base de datos
+ * y se utiliza en la aplicación para trabajar con POO
+ */
 class Usuario
 {
        

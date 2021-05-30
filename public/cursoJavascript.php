@@ -8,7 +8,7 @@
                 <div class="col">
                     <h1 class="text-center">Curso de Javascript</h1>
                     <!-- Preview Image-->
-                    <img class="img-fluid rounded" src="img/Javascript.jpg" alt="..." />
+                    <img class="img-fluid rounded" src="img/Javascript.jpg" alt="Imagen de javascript" />
                     <hr />
                     <!-- Acerca del curso-->
                     <h2>Acerca del curso</h2>

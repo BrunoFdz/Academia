@@ -1,3 +1,4 @@
+<?php if (isset($_SESSION['idUsuario']) && isset($_SESSION['rol']) && $_SESSION['rol'] == 'administrador') { ?>
 <div class="container my-3 py-5">
     <h1 class="page-header">
         <?php echo $per->getNombre(); ?>
@@ -97,3 +98,8 @@
 </div>
 
 <script src="js/formularioEditarUsuario.js"></script>
+<?php
+} else {
+    header('Location: index.php');
+}
+?>

@@ -1,3 +1,4 @@
+<?php if (isset($_SESSION['idUsuario']) && isset($_SESSION['rol']) && $_SESSION['rol'] == 'administrador') { ?>
 <div class="container my-3 py-5">
     <h1 class="page-header">Actualizar contraseña de <?php echo $usu->getNombreUsuario()?></h1>
 
@@ -25,3 +26,8 @@
 </div>
 
 <script src="js/actualizarPassword.js"></script>
+<?php
+} else {
+    header('Location: index.php');
+}
+?>

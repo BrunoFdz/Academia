@@ -1,3 +1,4 @@
+<?php if (isset($_SESSION['idUsuario']) && isset($_SESSION['rol']) && $_SESSION['rol'] == 'administrador') { ?>
 <div class="container-fluid">
     <h1 class="mt-2">Profesores</h1>
 
@@ -37,3 +38,8 @@
         </tbody>
     </table> 
 </div>
+<?php
+} else {
+    header('Location: index.php');
+}
+?>

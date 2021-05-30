@@ -1,4 +1,5 @@
-<!-- Contenido principal -->
+<?php if (isset($_SESSION['idUsuario']) && isset($_SESSION['rol'])) { ?>
+    <!-- Contenido principal -->
     <main>
         <section class="py-5">
             <div class="container">
@@ -6,7 +7,7 @@
                     Mis cursos
                 </h1>
                 <hr>          
-                <?php foreach ($resultado as $r):?>
+                <?php foreach ($resultado as $r): ?>
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
@@ -16,12 +17,19 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            Profesor: <?php echo $this->modeloPersona->getById($r->getProfesorId())->getNombre(). " "
-                                    .$this->modeloPersona->getById($r->getProfesorId())->getApellidos()
-                                    .". Correo: ".$this->modeloPersona->getById($r->getProfesorId())->getCorreo();?>
+                            Profesor: <?php
+                            echo $this->modeloPersona->getById($r->getProfesorId())->getNombre() . " "
+                            . $this->modeloPersona->getById($r->getProfesorId())->getApellidos()
+                            . ". Correo: " . $this->modeloPersona->getById($r->getProfesorId())->getCorreo();
+                            ?>
                         </div>
                     </div>
-                <?php endforeach; ?>
+    <?php endforeach; ?>
             </div>
         </section>     
     </main>
+    <?php
+} else {
+    header('Location: index.php');
+}
+?>

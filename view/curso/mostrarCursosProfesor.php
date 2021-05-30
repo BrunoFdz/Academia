@@ -1,4 +1,5 @@
-<!-- Contenido principal -->
+<?php if (isset($_SESSION['idUsuario']) && isset($_SESSION['rol']) && ($_SESSION['rol'] == 'profesor' || $_SESSION['rol'] == 'administrador')) { ?>
+    <!-- Contenido principal -->
     <main>
         <section class="py-5">
             <div class="container">
@@ -6,7 +7,7 @@
                     Mis cursos
                 </h1>
                 <hr>          
-                <?php foreach ($resultado as $curso):?>
+                <?php foreach ($resultado as $curso): ?>
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
@@ -23,3 +24,8 @@
             </div>
         </section>     
     </main>
+<?php
+} else {
+    header('Location: index.php');
+}
+?>

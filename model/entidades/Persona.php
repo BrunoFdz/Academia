@@ -1,4 +1,10 @@
 <?php
+/**
+ * Clase persona que representa la tabla de personas en la base de datos
+ * 
+ * Esta clase de persona representa la tabla de personas en la base de datos
+ * y se utiliza en la aplicación para trabajar con POO
+ */
 
 class Persona {
     

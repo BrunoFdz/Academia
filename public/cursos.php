@@ -21,8 +21,6 @@
                         <a class="nav-link" id="v-pills-javascript-tab" data-toggle="pill"
                            href="#v-pills-javascript" role="tab" aria-controls="v-pills-javascript"
                            aria-selected="false"> Curso de Javascript</a>
-                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings"
-                           role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -61,7 +59,7 @@
                                 <h5 class="card-header">Curso de Office365</h5>
                                 <div class="card-body">
                                     <img class="img-fluid" src="img/1903-office-365-empresas-pymes.png"
-                                         alt="Imagen Java">
+                                         alt="Imagen Office">
                                     <h5 class="card-title">Información</h5>
                                     <p class="card-text">Este curso de Office 365 está dirigido a personas con o sin
                                         conocimientos previos en informática, que deseen capacitarse de forma
@@ -88,7 +86,7 @@
                                 <div class="card text-center">
                                     <h5 class="card-header">Curso de Javascript</h5>
                                     <div class="card-body">
-                                        <img class="img-fluid mt-3 mb-5" src="img/cursoJavascript.jpg" alt="Imagen Java">
+                                        <img class="img-fluid mt-3 mb-5" src="img/cursoJavascript.jpg" alt="Imagen Javascript">
                                         <h5 class="card-title">Información</h5>
                                         <p class="card-text">Este curso de JavaScript está dirigido a personas con
                                             conocimientos previos en programación, que deseen aprender desde cero
@@ -108,8 +106,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-                             aria-labelledby="v-pills-settings-tab">...</div>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@
                 <div class="col">
                     <h1 class="text-center">Curso de Office365</h1>
                     <!-- Preview Image-->
-                    <img class="img-fluid rounded" src="img/office.jpg" alt="Imagen del curso de Java" />
+                    <img class="img-fluid rounded" src="img/office.jpg" alt="Imagen del curso de Office365" />
                     <hr />
                     <!-- Acerca del curso-->
                     <h2>Acerca del curso</h2>

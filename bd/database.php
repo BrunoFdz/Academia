@@ -1,4 +1,10 @@
 <?php
+/** 
+ *  Clase utilizada para la conexión con la base de datos
+ *  
+ *  Esta clase es utilizada para la conexión con la base de datos con 
+ *  un método estático para no tener que instanciar la propia clase
+ */
 class Database
 {
     public static function connect()

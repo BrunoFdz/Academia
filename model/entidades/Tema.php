@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Clase tema que representa la tabla de tema en la base de datos
+ * 
+ * Esta clase de tema representa la tabla de tema en la base de datos
+ * y se utiliza en la aplicación para trabajar con POO
+ */
 class Tema {
     
     private $id;
