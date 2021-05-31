@@ -1,29 +1,46 @@
 <?php
-
+/**
+ * Controlador de los cursos
+ */
 class CursoController {
 
     private $model;
     private $modeloPersona;
     private $utilidades;
 
+    /**
+     * Constructor de la clase
+     * 
+     * Instancia el modelo de curso, el modelo de personas y la clase utilidades
+     */
     public function __construct() {
         $this->model = new CursoDAO();
         $this->modeloPersona = new PersonaDAO();
         $this->utilidades = new Utilidades();
     }
 
+    /**
+     * Método utilizado para cargar la vista principal en el que se muestra
+     * todos los cursos
+     */
     public function index() {
         require_once '../view/header.php';
         require_once '../view/curso/curso.php';
         require_once '../view/footer.php';
     }
 
-    //Función que carga el formulario de crear/editar cursos y valida el formulario
+    /**
+     * Método que carga el formulario de crear/editar cursos y valida el formulario
+     * 
+     * En caso de que los datos sean correctos llama al método de guardar curso
+     */
     public function vistaEditar() {
+        //Variables utilizadas para la validación
         $nombre = $profesor = "";
         $errorNombre = $errorProfesor = "";
         $errores = false;
 
+        //Comprobamos si el formulario ha sido enviado
         if (isset($_REQUEST["bEnviar"])) {
             if(isset($_POST['id'])){
                 $id = $_POST['id'];
@@ -50,6 +67,7 @@ class CursoController {
             
         }
         
+        //Creamos un curso y en caso de recibir un id obtiene el curso con ese id
         $curso = new Curso();
         if (isset($_REQUEST['id'])) {
             $curso = $this->model->getById($_REQUEST['id']);
@@ -60,7 +78,15 @@ class CursoController {
         require_once '../view/footer.php';
     }
 
-    //Método para guardar los cursos . Se utiliza para los nuevos cursos y para actualizar
+    /**
+     * Método utilizado para guardar los cursos.
+     * 
+     * Se utiliza para los nuevos cursos y para actualizar los ya existentes
+     * 
+     * @param type $id  id del curso que queremos guardar
+     * @param type $nombre nombre del curso que queremos guardar
+     * @param type $profesor id del profesor del curso que queremos guardar
+     */
     public function guardar($id, $nombre, $profesor) {
         $curso = new Curso();
 
@@ -73,13 +99,21 @@ class CursoController {
         header('Location: index.php?c=curso');
     }
 
-    //Funcion para eliminar un curso recibiendo el id del curso por petición
+    /**
+     * Método utilizado para eliminar los cursos
+     * 
+     * Recibe el id del curso por petición http
+     */
     public function eliminar() {
         $this->model->delete($_REQUEST['id']);
         header('Location: index.php?c=curso');
     }
 
-    //Función para mostrar los cursos de un alumno recibiendo el id del alumno por petición
+    /**
+     * Método utilizado para mostrar los cursos de un alumno 
+     * 
+     * Recibiendo el id del alumno por petición http
+     */
     public function mostrarCursosAlumno() {
 
         if (isset($_REQUEST['id'])) {
@@ -91,7 +125,11 @@ class CursoController {
         require_once '../view/footer.php';
     }
 
-    //Función para mostrar los cursos de un profesor recibiendo el id del profesor por petición
+    /**
+     * Método utilizado para mostrar los cursos de un profesor
+     * 
+     * Recibiendo el id del profesor por petición http
+     */    
     public function mostrarCursosProfesor() {
         if (isset($_REQUEST['id'])) {
             $resultado = $this->model->listarCursosProfesor($_REQUEST['id']);

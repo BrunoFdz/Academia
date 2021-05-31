@@ -1,18 +1,30 @@
 <?php
 
+/**
+ * Controlador de los temas
+ */
 class TemaController {
 
     private $model;
     private $modeloCurso;
     private $utilidades;
 
+    /**
+     * Constructor de la clase
+     * 
+     * Instancia el modelo de tema, el modelo de curso y la clase utilidades
+     */
     public function __construct() {
         $this->model = new TemaDAO();
         $this->modeloCurso = new CursoDAO();
         $this->utilidades = new Utilidades();
     }
 
-    //Función para mostrar los temas de un curso recibiendo el id del curso por petición
+    /**
+     * Método utilizado para mostrar los temas de un curso
+     * 
+     * Recibe el id del curso por petición http
+     */
     public function mostrarTemasCurso() {
 
         if (isset($_REQUEST['id'])) {
@@ -29,7 +41,12 @@ class TemaController {
         require_once '../view/footer.php';
     }
 
-    //Función que carga el formulario de crear/editar cursos y valida el formulario
+    /**
+     * Método utilizado para cagar el formulario de crear/editar temas y valida el 
+     * formulario
+     * 
+     * En caso de que los datos sean correctos llama al método guardar
+     */
     public function vistaEditar() {
         $titulo = $descripcion = "";
         $errorTitulo = $errorDescripcion = "";
@@ -80,7 +97,16 @@ class TemaController {
         require_once '../view/footer.php';
     }
 
-    //Método para guardar los cursos . Se utiliza para los nuevos cursos y para actualizar
+    /**
+     * Método utilizado para guardar el tema.
+     * 
+     * Se utiliza para los nuevos temas y para actualizar los ya existentes
+     * 
+     * @param type $id id del tema
+     * @param type $titulo titulo del tema
+     * @param type $descripcion descripción del tema
+     * @param type $cursoId id del curso del tema
+     */
     public function guardar($id, $titulo, $descripcion, $cursoId) {
         $tema = new Tema();
 
@@ -95,7 +121,11 @@ class TemaController {
         header("Location: index.php?c=tema&a=mostrarTemasCurso&id=$cursoId");
     }
 
-    //Funcion para eliminar un curso recibiendo el id del curso por petición
+    /**
+     * Método utilizado para eliminar un tema
+     * 
+     * Recibe el id del tema por petición http
+     */
     public function eliminar() {
         
         if (isset($_REQUEST['cursoId'])) {

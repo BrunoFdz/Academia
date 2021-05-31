@@ -1,9 +1,16 @@
 <?php
-
+/**
+ * Clase utilizada para guardar funciones que pueden ser utilizadas
+ * por el resto de clases
+ */
 class Utilidades {
 
-    //Método para filtrar los datos recibidos y eliminar posible código malicioso
-    //Recibe una cadena de texto y la devuelve filtrada
+    /**
+     * Método utilizado para filtrar los datos recibidos y eliminar posible código malicioso
+     * 
+     * @param String $datos
+     * @return String devuelve la cadena recibidad después de filtrarla
+     */
     public function filtrarDatos($datos) {
         $datos = strip_tags($datos);
         $datos = trim($datos);

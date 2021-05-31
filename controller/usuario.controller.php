@@ -1,17 +1,28 @@
 <?php
-
+/**
+ * Controlador de login
+ */
 class UsuarioController {
 
     private $model;
     private $utilidades;
 
+    /**
+     * Constructor de la clase
+     * 
+     * Instancia el modelo de usuario y la clase utilidades
+     */
     public function __construct() {
         $this->model = new UsuarioDAO();
         $this->utilidades = new Utilidades();
     }
 
-    //Funcion para loguear un usuario. Recibe el nombre de usuario y la contraseña
-    // En caso de que coincidan crea una sesión y establece el id y el rol
+    /**
+     * Método utilizado para el login de el usuario.
+     * 
+     * Recibe el nombre de usuario y la contraseña por petición http. En
+     * caso de que coincidan crea ua sesión y establece el id y el rol
+     */
     public function login() {
         $nombreUsuario = $this->utilidades->filtrarDatos($_POST['username']);
         $password = $this->utilidades->filtrarDatos($_POST['password']);
@@ -21,6 +32,7 @@ class UsuarioController {
             //Obtengo el id y el rol del usuario
             $usuarioDatos = $this->model->obtenerDatos($nombreUsuario);
 
+            //Creamos la sesión y guardamos el id y el rol
             session_start();
             $_SESSION['idUsuario'] = $usuarioDatos->getId();
             $_SESSION['rol'] = $usuarioDatos->getRol();
@@ -37,8 +49,11 @@ class UsuarioController {
         }
     }
 
-    //Función para desloguear un usuario.
-    //Elimina las sesiones y las destruye luego redirige al login
+    /**
+     * Método utilizado para el logout del usuario
+     * 
+     * Elimina los datos de la sesión y la destruye
+     */
     public function logout() {              
         session_start();        
         // Destruir todas las variables de sesión.

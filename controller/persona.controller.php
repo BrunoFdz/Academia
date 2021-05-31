@@ -1,39 +1,59 @@
 <?php
-
+/**
+ * Controlador de personas
+ */
 class PersonaController {
 
     private $model;
     private $modeloCurso;
     private $utilidades;
 
+    /**
+     * Constructor de la clase
+     * 
+     * Instancia el modelo de persona, el modelo de curso y clase utilidades
+     */
     public function __construct() {
         $this->model = new PersonaDAO();
         $this->modeloCurso = new CursoDAO();
         $this->utilidades = new Utilidades();
     }
 
-    //Método para mostrar todos los usuarios 
+    /**
+     * Método utilizado para cargar la vista principal en el que se muestra
+     * todos los usuarios
+     */
     public function index() {
         require_once '../view/header.php';
         require_once '../view/personas/personas.php';
         require_once '../view/footer.php';
     }
 
-    //Método para mostrar todos los profesores 
+    /**
+     * Método utilizado para cargar la vista de listar profesores en el que
+     * se muestra todos los profesores
+     */
     public function listarProfesores() {
         require_once '../view/header.php';
         require_once '../view/personas/listarProfesores.php';
         require_once '../view/footer.php';
     }
 
-    //Método para mostrar todos los alumnos
+    /**
+     * Método utilizado para cargar la vista de listar alumnos en el que
+     * se muestra todos los alumnos 
+     */
     public function listarAlumnos() {
         require_once '../view/header.php';
         require_once '../view/personas/listarAlumnos.php';
         require_once '../view/footer.php';
     }
-
-    //Método para mostrar todos los alumnos de un curso recibe el id del curso por petición
+    
+    /**
+     * Método utilizado para mostrar todos los alumnos de un curso 
+     * 
+     * Recibe el id del curso por petición http
+     */
     public function listarAlumnosCurso() {
         if (isset($_REQUEST['id'])) {
             $alumnos = $this->model->listarAlumnosCurso($_REQUEST['id']);
@@ -43,8 +63,11 @@ class PersonaController {
         require_once '../view/footer.php';
     }
 
-    //Método que carga el formulario de nuevo usuario y también lo válida
-    //En caso de que los datos sean correcto llama al método para insertar el nuevo usuario
+    /**
+     * Método que carga el formulario de nuevo usuario y también lo válida.
+     * 
+     * En caso de que los datos sean correctos llama al método para insertar el nuevo usuario
+     */
     public function vistaNuevo() {
         //Limpiamos las variables utilizadas
         $nombre = $apellidos = $correo = $nombreUsuario = $password = $rol = '';
@@ -167,8 +190,19 @@ class PersonaController {
         require_once '../view/footer.php';
     }
 
-    //Método para insertar un nuevo usuario
-    //Recibe por parámetros los datos del usuario y llama al método add de personaDAO para insertar el usuario
+    /**
+     * Método para insertar un nuevo usuario
+     * 
+     * Recibe por parámetros los datos del usuario y llama al método add de personaDAO para insertar el usuario
+     * 
+     * @param type $nombre nombre del usuario
+     * @param type $apellidos apellidos del usuario
+     * @param type $correo correo del usuario
+     * @param type $nombreUsuario nombre de usuario del usuario
+     * @param type $password contraseña del usuario
+     * @param type $rol rol del usuario
+     * @param type $cursos cursos del usuarios en caso de ser alumno
+     */
     public function nuevo($nombre, $apellidos, $correo, $nombreUsuario, $password, $rol, $cursos) {
         $per = new Persona();
 
@@ -199,8 +233,11 @@ class PersonaController {
         header('Location: index.php?c=Persona');
     }
 
-    //Método que carga el formulario de editar usuario y también lo válida
-    //En caso de que los datos sean correctos llama al método para actualizar al usuario
+    /**
+     * Método que carga el formulario de editar usuario y también lo válida
+     * 
+     * En caso de que los datos sean correctos llama al método para actualizar al usuario
+     */
     public function vistaEditar() {
         //Limpiamos las variables utilizadas
         $nombre = $apellidos = $correo = $nombreUsuario = $password = $rol = '';
@@ -334,8 +371,19 @@ class PersonaController {
         require_once '../view/footer.php';
     }
 
-    //Método para actualizar un usuario
-    //Recibe por parámetros los datos del usuario y llama al método update de personaDAO para actualizar el usuario
+    /**
+     * Método para actualizar un usuario
+     * 
+     * Recibe por parámetros los datos del usuario y llama al método update de personaDAO para actualizar el usuario
+     * 
+     * @param type $id id del usuario
+     * @param type $nombre nombre del usuario
+     * @param type $apellidos apellidos del usuario
+     * @param type $correo correo del usuario
+     * @param type $nombreUsuario nombre de usuario del usuario
+     * @param type $rol rol del usuario
+     * @param type $cursos cursos del usuario en caso de ser un alumno
+     */
     public function update($id, $nombre, $apellidos, $correo, $nombreUsuario, $rol, $cursos) {
 
         $per = new Persona();
@@ -360,15 +408,21 @@ class PersonaController {
         header('Location: index.php?c=Persona');
     }
 
-    //Método para eliminar un usuario
-    //Recibe el id del usuario por una petición get
+    /**
+     * Método para eliminar un usuario
+     * 
+     * Recibe el id del usuario por una petición get
+     */
     public function eliminar() {
         $this->model->delete($_REQUEST['id']);
         header('Location: index.php?c=Persona');
     }
 
-    //Método utilizado para comprobar si un email es válido o ya esta siendo utilizado para la validación con ajax
-    //Recibe el email por petición post
+    /**
+     * Método utilizado para comprobar si un email es válido o ya esta siendo utilizado para la validación con ajax
+     * 
+     * Recibe el email por petición http. Si el correo electrónico es válido muestra true, si no es válido devuelve false
+     */
     public function comprobarEmailAjax() {
         if (isset($_REQUEST['email']) && !empty($_REQUEST['email'])) {
             $email = trim($_REQUEST['email']);
@@ -385,8 +439,11 @@ class PersonaController {
         }
     }
 
-    //Método utilizado para comprobar si un nombre de usuario es válido o ya esta siendo utilizado, para la validación con ajax
-    //Recibe el nombre de usuario por petición post
+    /**
+     * Método utilizado para comprobar si un nombre de usuario es válido o ya esta siendo utilizado, para la validación con ajax
+     * 
+     * Recibe el nombre de usuario por petición post. Si el nombre de usuario es válido muestra true, si no es válido devuelve false
+     */
     public function comprobarNombreUsuarioAjax() {
         if (isset($_REQUEST['nombreUsuario']) && !empty($_REQUEST['nombreUsuario'])) {
             $nombreUsuario = trim($_REQUEST['nombreUsuario']);
@@ -403,8 +460,12 @@ class PersonaController {
         }
     }
 
-    //Método utilizado para comprobar si un email es válido o ya esta siendo utilizado
-    //Recibe el email por parámetro
+    /**
+     * Método utilizado para comprobar si un email es válido o ya esta siendo utilizado
+     * 
+     * @param type $email email que queremos comprobar si existe
+     * @return boolean Si el correo electrónico es válido devuelve true, si no es válido devuelve false
+     */
     public function emailValido($email) {
         $valido = $this->model->comprobarEmail($email);
 
@@ -416,8 +477,12 @@ class PersonaController {
         }
     }
 
-    //Método utilizado para comprobar si un nombre de usuario es válido o ya esta siendo utilizado
-    //Recibe el nombre de usuario por parámetro
+    /**
+     * Método utilizado para comprobar si un nombre de usuario es válido o ya esta siendo utilizado
+     * 
+     * @param type $nombreUsuario nombre de usuario que queremos comprobar si existe
+     * @return boolean Si el nombre de usuario es válido devuelve true, si no es válido devuelve false
+     */
     public function nombreUsuarioValido($nombreUsuario) {
         $valido = $this->model->comprobarNombreUsuario($nombreUsuario);
 
@@ -429,8 +494,14 @@ class PersonaController {
         }
     }
 
-    //Método para actualizar la contraseña de un usuario
-    //Recibe el id del usuario por una petición get
+
+    /**
+     * Método para actualizar la contraseña de un usuario
+     * 
+     * Recibe el id del usuario por una petición http. Carga el formulario de 
+     * actualizar contraseña, lo válida y en caso de ser correcto llama al método
+     * de personaDAO actualizarPassword
+     */
     public function vistaNuevaPassword() {
         $errorPassword = '';
         $usu = new Usuario();

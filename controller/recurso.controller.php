@@ -1,16 +1,28 @@
 <?php
-
+/**
+ * Controlador de recursos
+ */
 class RecursoController {
 
     private $model;
     private $modeloTema;
 
+    /**
+     * Constructor de la clase
+     * 
+     * Instancia el modelo de recurso y el modelo de tema 
+     */
     public function __construct() {
         $this->model = new RecursoDAO();
         $this->modeloTema = new TemaDAO();
     }
 
-    //Función para mostrar un tema y sus recursos
+    /**
+     * Método utilizado para mostrar el tema junto con sus recursos
+     * 
+     * Recibe el id del tema por petición http. Obtiene el tema y sus recursos 
+     * y los carga
+     */
     public function mostrarRecursosTema() {
 
         if (isset($_REQUEST['temaId'])) {
@@ -28,6 +40,9 @@ class RecursoController {
     }
 
     //Función para mostra el formulario para subir un nuevo recurso
+    /**
+     * Método utilizado para mostrar el formulario para subir un nuevo recurso y lo válida
+     */
     public function vistaNuevo() {
         $errorFichero = "";
         $errores = false;
@@ -37,7 +52,8 @@ class RecursoController {
         if (isset($_REQUEST['temaId'])) {
             $tema = $this->modeloTema->getById($_REQUEST['temaId']);
         }
-
+        
+        //Comprobamos si el formulario ha sido enviado
         if (isset($_REQUEST['bEnviar'])) {
 
             if (isset($_POST['temaId'])) {
@@ -77,7 +93,13 @@ class RecursoController {
         require_once '../view/footer.php';
     }
 
-    //Método para guardar el recurso.
+    /**
+     * Método utilizado para guardar un recurso
+     * 
+     * @param type $nombre nombre del recurso 
+     * @param type $tipo tipo mime del recurso
+     * @param type $temaId id del tema del recurso
+     */
     public function guardar($nombre, $tipo, $temaId) {
         $recurso = new Recurso();
 
@@ -91,7 +113,12 @@ class RecursoController {
         header("Location: index.php?c=Recurso&a=mostrarRecursosTema&temaId=$temaId");
     }
 
-    //Funcion para eliminar un recurso recibe el id del recurso por petición
+    /**
+     * Método utilizado para eliminar un recurso
+     * 
+     * Recibe el id del recurso por petición http. Primero elimina el archivo de
+     * la carpeta y luego elimina la referencia en la base de datos
+     */
     public function eliminar() {
 
         //Obtenemos el recurso y el tema
@@ -115,7 +142,11 @@ class RecursoController {
         }
     }
 
-    //Funcion para descargar un recurso recibe el id del recurso por petición
+    /**
+     * Método utilizado para descargar un recurso 
+     * 
+     * Recibe el id del recurso por petición. 
+     */
     public function descargar() {
         if (isset($_REQUEST['id'])) {
             //Creamos un recurso
