@@ -48,7 +48,7 @@ $(document).ready(function () {
                 required: true,
                 //Comprobamos que el formato del correo sea correcto
                 regex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
-                //Comprobamos que el correo no esté registrado ya en la base de datos
+                //Comprobamos que el correo no esté registrado ya en la base de datos de manera asíncrona
                 remote: {
                     param: {
                         url: "?c=Persona&a=comprobarEmailAjax",
@@ -68,7 +68,7 @@ $(document).ready(function () {
 
             nombreUsuario: {
                 required: true,
-                //Comprobamos que el nombre de usuario no esté registrado ya en la base de datos
+                //Comprobamos que el nombre de usuario no esté registrado ya en la base de datos de manera asíncrona
                 remote: {
                     param: {
                         url: "?c=Persona&a=comprobarNombreUsuarioAjax",

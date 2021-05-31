@@ -1,6 +1,13 @@
 <?php
 
-//Autocargador
+/**
+ * Autocargador de la aplicación
+ * 
+ * Este método nos incluye automáticamente las clases utilizadas a lo largo de 
+ * la aplicación a medida que las necesitemos.
+ * 
+ * @param type $clase clase que queremos utilizar
+ */
 function mi_autocargador($clase){        
     $fichero = $clase.".php";
     

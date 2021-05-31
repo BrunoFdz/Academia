@@ -6,6 +6,8 @@ $(document).ready(function () {
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 
+    //Método para comprobar el tamaño del fichero. Comprueba que el tamaño del fichero es menos o igual al indicado
+    // en bytes
     $.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
     });

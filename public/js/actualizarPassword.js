@@ -14,6 +14,7 @@ $(document).ready(function () {
             password: {
                 required: true,
                 minlength: 8,
+                //Comprobamos que la contraseña tenga como mínimo una minúscula, una mayúscula y un número
                 regex: /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/
             }
             
