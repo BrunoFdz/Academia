@@ -14,7 +14,7 @@ class TemaDAO extends BaseDAO {
      * Establece los atributos heredados de la BaseDAO para hacer referencia 
      * a la tabla temas y a la clase Tema. Además obtiene la conexión con la 
      * base de datos
-     */    
+     */
     public function __construct() {
         try {
             $this->table = "temas";
@@ -52,7 +52,7 @@ class TemaDAO extends BaseDAO {
             die($e->getMessage());
         }
     }
-    
+
     /**
      * Método utilizado para obtener una lista de temas pertenecientes a un curso
      * 
@@ -65,6 +65,23 @@ class TemaDAO extends BaseDAO {
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($idCurso));
             return $stm->fetchAll(PDO::FETCH_CLASS, 'Tema');
+        } catch (Exception $ex) {
+            die($e->getMessage());
+        }
+    }
+
+    /**
+     * Método que devuelve el número de temas de un curso
+     * 
+     * @param type $idCurso id del curso que queremos obtener el número de tema
+     * @return type número de temas del curso
+     */
+    public function numeroTemasCurso($idCurso) {
+        try {
+            $sql = "SELECT id FROM temas where curso_id = ?";
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array($idCurso));
+            return $stm->rowCount();
         } catch (Exception $ex) {
             die($e->getMessage());
         }

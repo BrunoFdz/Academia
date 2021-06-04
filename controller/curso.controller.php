@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Controlador de los cursos
  */
@@ -6,6 +7,7 @@ class CursoController {
 
     private $model;
     private $modeloPersona;
+    private $modeloTema;
     private $utilidades;
 
     /**
@@ -16,6 +18,7 @@ class CursoController {
     public function __construct() {
         $this->model = new CursoDAO();
         $this->modeloPersona = new PersonaDAO();
+        $this->modeloTema = new TemaDAO();
         $this->utilidades = new Utilidades();
     }
 
@@ -42,10 +45,10 @@ class CursoController {
 
         //Comprobamos si el formulario ha sido enviado
         if (isset($_REQUEST["bEnviar"])) {
-            if(isset($_POST['id'])){
+            if (isset($_POST['id'])) {
                 $id = $_POST['id'];
             }
-            
+
             if (empty($_POST['nombre'])) {
                 $errorNombre = "El nombre es requerido";
                 $errores = true;
@@ -59,14 +62,13 @@ class CursoController {
             } else {
                 $profesor = $_POST['profesor'];
             }
-            
+
             //Si no tiene errores añadimos al usuario
-            if(!$errores){
+            if (!$errores) {
                 $this->guardar($id, $nombre, $profesor);
             }
-            
         }
-        
+
         //Creamos un curso y en caso de recibir un id obtiene el curso con ese id
         $curso = new Curso();
         if (isset($_REQUEST['id'])) {
@@ -105,7 +107,15 @@ class CursoController {
      * Recibe el id del curso por petición http
      */
     public function eliminar() {
-        $this->model->delete($_REQUEST['id']);
+        $idCurso = $_REQUEST['id'];
+
+        //Comprobamos que el curso no tenga temas de lo contrario redirigimos con un error
+        if ($this->modeloTema->numeroTemasCurso($idCurso) > 0) {
+            header('Location: index.php?c=curso&errCur');
+        }
+
+        $this->model->delete($idCurso);
+
         header('Location: index.php?c=curso');
     }
 
@@ -129,7 +139,7 @@ class CursoController {
      * Método utilizado para mostrar los cursos de un profesor
      * 
      * Recibiendo el id del profesor por petición http
-     */    
+     */
     public function mostrarCursosProfesor() {
         if (isset($_REQUEST['id'])) {
             $resultado = $this->model->listarCursosProfesor($_REQUEST['id']);
@@ -137,6 +147,18 @@ class CursoController {
 
         require_once '../view/header.php';
         require_once '../view/curso/mostrarCursosProfesor.php';
+        require_once '../view/footer.php';
+    }
+
+    /**
+     * Método utilizado para mostrar todos los cursos 
+     */
+    public function mostrarCursosAdministrador() {
+        
+        $resultado = $this->model->findAll();
+
+        require_once '../view/header.php';
+        require_once '../view/curso/mostrarCursosAdministrador.php';
         require_once '../view/footer.php';
     }
 

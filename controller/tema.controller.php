@@ -7,6 +7,7 @@ class TemaController {
 
     private $model;
     private $modeloCurso;
+    private $modeloRecurso;
     private $utilidades;
 
     /**
@@ -17,6 +18,7 @@ class TemaController {
     public function __construct() {
         $this->model = new TemaDAO();
         $this->modeloCurso = new CursoDAO();
+        $this->modeloRecurso = new RecursoDAO;
         $this->utilidades = new Utilidades();
     }
 
@@ -127,12 +129,19 @@ class TemaController {
      * Recibe el id del tema por petición http
      */
     public function eliminar() {
-        
+        $idTema = $_REQUEST['id'];
+
         if (isset($_REQUEST['cursoId'])) {
             $cursoId = $_REQUEST['cursoId'];
         }
+
+        //Comprobamos que el curso no tenga temas de lo contrario redirigimos con un error
+        if ($this->modeloRecurso->numeroTemasCurso($idTema) > 0) {
+            header("Location: index.php?c=tema&a=mostrarTemasCurso&id=$cursoId&errTem");
+        }
+
+        $this->model->delete($idTema);
         
-        $this->model->delete($_REQUEST['id']);
         header("Location: index.php?c=tema&a=mostrarTemasCurso&id=$cursoId");
     }
 

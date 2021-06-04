@@ -17,7 +17,7 @@ $(document).ready(function () {
         messages: {
 
             nombre: {
-                required: "Por favor proporcione una contraseña"
+                required: "Por favor proporcione nombre de curso"
             },
             
             profesor: {

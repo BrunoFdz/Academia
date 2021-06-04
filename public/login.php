@@ -3,8 +3,7 @@
 <main>
     <div class="container-fluid">
         <div class="row justify-content-center">                        
-            <div class="col-xl-6 col-lg-7 col-8">
-                <div class="errorFormulario text-center mt-5"><h2><?php if(isset($_REQUEST['error'])) echo "Error en el login" ?></h2></div>
+            <div class="col-xl-6 col-lg-7 col-8">               
                 <div class="row login_general">
                     <div class="col-md-3 d-none d-sm-none d-md-flex bg-dark text-center justify-content-center align-items-center login_logo">
                         <img src="img/logo-login.png" alt="Logo FI Academia" class="img-fluid">
@@ -40,7 +39,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                <?php if (isset($_REQUEST['error'])) { ?>
+                    <div class="alert alert-danger text-center mt-5">
+                        Usuario o contraseña incorrectos
+                    </div>
+                <?php } ?>
+            </div>            
         </div>
     </div>
 </main>

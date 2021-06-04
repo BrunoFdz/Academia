@@ -14,7 +14,7 @@ class RecursoDAO extends BaseDAO {
      * Establece los atributos heredados de la BaseDAO para hacer referencia 
      * a la tabla recursos y a la clase Recurso. Además obtiene la conexión con la 
      * base de datos
-     */    
+     */
     public function __construct() {
         try {
             $this->table = "recursos";
@@ -31,7 +31,9 @@ class RecursoDAO extends BaseDAO {
      * 
      * @ignore
      */
-    public function update($recurso) {}
+    public function update($recurso) {
+        
+    }
 
     /**
      * Método utilizado para añadir los datos de un recurso en la base de datos
@@ -39,14 +41,14 @@ class RecursoDAO extends BaseDAO {
      * @param Recurso $recurso recurso que queremos añadir
      */
     public function add($recurso) {
-        try {           
+        try {
             $sql = "INSERT INTO recursos (nombre, tipo_mime, tema_id) VALUES (?, ?, ?)";
-            $this->pdo->prepare($sql)->execute(array($recurso->getNombre(), $recurso->getTipoMime() , $recurso->getTemaId()));
+            $this->pdo->prepare($sql)->execute(array($recurso->getNombre(), $recurso->getTipoMime(), $recurso->getTemaId()));
         } catch (Exception $e) {
             die($e->getMessage());
         }
     }
-    
+
     /**
      * Método utilizado para obtener una lista de recursos de un tema
      * 
@@ -59,6 +61,23 @@ class RecursoDAO extends BaseDAO {
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($idTema));
             return $stm->fetchAll(PDO::FETCH_CLASS, 'Recurso');
+        } catch (Exception $ex) {
+            die($e->getMessage());
+        }
+    }
+
+    /**
+     * Método que devuelve el número de recursos de un tema
+     * 
+     * @param type $idTema id del tema que queremos obtener el número de recursos
+     * @return type número de recursos del tema
+     */
+    public function numeroTemasCurso($idTema) {
+        try {
+            $sql = "SELECT id FROM recursos where tema_id = ?";
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array($idTema));
+            return $stm->rowCount();
         } catch (Exception $ex) {
             die($e->getMessage());
         }

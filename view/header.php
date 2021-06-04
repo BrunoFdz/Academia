@@ -79,6 +79,9 @@ session_start();
                         <?php if (isset($_SESSION['idUsuario']) && isset($_SESSION['rol']) && $_SESSION['rol'] == 'administrador') { ?>
                             <ul class="navbar-nav ml-auto mr-5 text-center">
                                 <li class="nav-item text-white">
+                                    <a class="nav-link" href="index.php?c=Curso&a=mostrarCursosAdministrador">Mostrar cursos</a>
+                                </li>
+                                <li class="nav-item text-white">
                                     <a class="nav-link" href="index.php?c=Persona">Usuarios</a>
                                 </li>
                                 <li class="nav-item text-white">
@@ -95,7 +98,7 @@ session_start();
 
                         <?php
                         if (isset($_SESSION['idUsuario'])) {
-                            echo '<a class="nav-link text-center btn" href="?c=Usuario&a=logout">Cerrar Sesión <i class="fas fa-door-open"></i></a>';
+                            echo '<a class="nav-link text-center btn" href="index.php?c=Usuario&a=logout">Cerrar Sesión <i class="fas fa-door-open"></i></a>';
                         } else {
                             echo '<a class="nav-link text-center btn" href="login.php">Login <i class="fas fa-sign-in-alt"></i></a>';
                         }

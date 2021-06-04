@@ -12,6 +12,11 @@
                         <a class="btn" href="?c=tema&a=vistaEditar&cursoId=<?php echo $curso->getId(); ?>">Nuevo tema</a>
                     </div>
                 <?php } ?>
+                <?php if (isset($_REQUEST['errTem'])) { ?>
+                    <div class="alert alert-danger text-center">
+                        Error al eliminar el tema. Asegúrese de eliminar los recursos antes de eliminar el tema
+                    </div>
+                <?php } ?>
                 <?php foreach ($temas as $tema): ?>
                     <div class="card mb-4">
                         <div class="card-body">

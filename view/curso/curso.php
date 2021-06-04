@@ -6,6 +6,12 @@
             <a class="btn" href="?c=Curso&a=vistaEditar">Nuevo curso</a>
         </div>
 
+        <?php if (isset($_REQUEST['errCur'])) { ?>
+            <div class="alert alert-danger text-center">
+                Error al eliminar el curso. Asegúrese de eliminar los temas antes de eliminar el curso
+            </div>
+        <?php } ?>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -33,11 +39,11 @@
                                 <i class="fas fa-trash-alt"></i> Eliminar</a>
                         </td>
                     </tr>
-    <?php endforeach; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-<?php
+    <?php
 } else {
     header('Location: index.php');
 }
