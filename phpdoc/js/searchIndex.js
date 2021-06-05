@@ -1,16 +1,6 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\Database",
-            "name": "Database",
-            "summary": "Clase\u0020utilizada\u0020para\u0020la\u0020conexi\u00F3n\u0020con\u0020la\u0020base\u0020de\u0020datos",
-            "url": "classes/Database.html"
-        },                {
-            "fqsen": "\\Database\u003A\u003Aconnect\u0028\u0029",
-            "name": "connect",
-            "summary": "M\u00E9todo\u0020utilizado\u0020para\u0020conectarse\u0020a\u0020la\u0020base\u0020de\u0020datos",
-            "url": "classes/Database.html#method_connect"
-        },                {
             "fqsen": "\\CursoController",
             "name": "CursoController",
             "summary": "Controlador\u0020de\u0020los\u0020cursos",
@@ -51,6 +41,11 @@ Search.appendIndex(
             "summary": "M\u00E9todo\u0020utilizado\u0020para\u0020mostrar\u0020los\u0020cursos\u0020de\u0020un\u0020profesor",
             "url": "classes/CursoController.html#method_mostrarCursosProfesor"
         },                {
+            "fqsen": "\\CursoController\u003A\u003AmostrarCursosAdministrador\u0028\u0029",
+            "name": "mostrarCursosAdministrador",
+            "summary": "M\u00E9todo\u0020utilizado\u0020para\u0020mostrar\u0020todos\u0020los\u0020cursos",
+            "url": "classes/CursoController.html#method_mostrarCursosAdministrador"
+        },                {
             "fqsen": "\\CursoController\u003A\u003A\u0024model",
             "name": "model",
             "summary": "",
@@ -60,6 +55,11 @@ Search.appendIndex(
             "name": "modeloPersona",
             "summary": "",
             "url": "classes/CursoController.html#property_modeloPersona"
+        },                {
+            "fqsen": "\\CursoController\u003A\u003A\u0024modeloTema",
+            "name": "modeloTema",
+            "summary": "",
+            "url": "classes/CursoController.html#property_modeloTema"
         },                {
             "fqsen": "\\CursoController\u003A\u003A\u0024utilidades",
             "name": "utilidades",
@@ -245,6 +245,11 @@ Search.appendIndex(
             "name": "modeloCurso",
             "summary": "",
             "url": "classes/TemaController.html#property_modeloCurso"
+        },                {
+            "fqsen": "\\TemaController\u003A\u003A\u0024modeloRecurso",
+            "name": "modeloRecurso",
+            "summary": "",
+            "url": "classes/TemaController.html#property_modeloRecurso"
         },                {
             "fqsen": "\\TemaController\u003A\u003A\u0024utilidades",
             "name": "utilidades",
@@ -781,6 +786,11 @@ Search.appendIndex(
             "summary": "M\u00E9todo\u0020utilizado\u0020para\u0020obtener\u0020una\u0020lista\u0020de\u0020recursos\u0020de\u0020un\u0020tema",
             "url": "classes/RecursoDAO.html#method_listarRecursosTema"
         },                {
+            "fqsen": "\\RecursoDAO\u003A\u003AnumeroTemasCurso\u0028\u0029",
+            "name": "numeroTemasCurso",
+            "summary": "M\u00E9todo\u0020que\u0020devuelve\u0020el\u0020n\u00FAmero\u0020de\u0020recursos\u0020de\u0020un\u0020tema",
+            "url": "classes/RecursoDAO.html#method_numeroTemasCurso"
+        },                {
             "fqsen": "\\TemaDAO",
             "name": "TemaDAO",
             "summary": "Esta\u0020clase\u0020nos\u0020permitir\u00E1\u0020realizar\u0020las\u0020diferentes\u0020operaciones\u0020referente\na\u0020la\u0020tabla\u0020de\u0020temas\u0020con\u0020la\u0020base\u0020de\u0020datos",
@@ -805,6 +815,11 @@ Search.appendIndex(
             "name": "listarTemasCurso",
             "summary": "M\u00E9todo\u0020utilizado\u0020para\u0020obtener\u0020una\u0020lista\u0020de\u0020temas\u0020pertenecientes\u0020a\u0020un\u0020curso",
             "url": "classes/TemaDAO.html#method_listarTemasCurso"
+        },                {
+            "fqsen": "\\TemaDAO\u003A\u003AnumeroTemasCurso\u0028\u0029",
+            "name": "numeroTemasCurso",
+            "summary": "M\u00E9todo\u0020que\u0020devuelve\u0020el\u0020n\u00FAmero\u0020de\u0020temas\u0020de\u0020un\u0020curso",
+            "url": "classes/TemaDAO.html#method_numeroTemasCurso"
         },                {
             "fqsen": "\\UsuarioDAO",
             "name": "UsuarioDAO",
@@ -840,6 +855,16 @@ Search.appendIndex(
             "name": "filtrarDatos",
             "summary": "M\u00E9todo\u0020utilizado\u0020para\u0020filtrar\u0020los\u0020datos\u0020recibidos\u0020y\u0020eliminar\u0020posible\u0020c\u00F3digo\u0020malicioso",
             "url": "classes/Utilidades.html#method_filtrarDatos"
+        },                {
+            "fqsen": "\\Database",
+            "name": "Database",
+            "summary": "Clase\u0020utilizada\u0020para\u0020la\u0020conexi\u00F3n\u0020con\u0020la\u0020base\u0020de\u0020datos",
+            "url": "classes/Database.html"
+        },                {
+            "fqsen": "\\Database\u003A\u003Aconnect\u0028\u0029",
+            "name": "connect",
+            "summary": "M\u00E9todo\u0020utilizado\u0020para\u0020conectarse\u0020a\u0020la\u0020base\u0020de\u0020datos",
+            "url": "classes/Database.html#method_connect"
         },                {
             "fqsen": "\\",
             "name": "\\",
