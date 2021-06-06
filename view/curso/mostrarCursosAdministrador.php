@@ -17,11 +17,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            Profesor: <?php
-                            echo $this->modeloPersona->getById($r->getProfesorId())->getNombre() . " "
-                            . $this->modeloPersona->getById($r->getProfesorId())->getApellidos()
-                            . ". Correo: " . $this->modeloPersona->getById($r->getProfesorId())->getCorreo();
-                            ?>
+                            <a class="btn" href="?c=persona&a=listarAlumnosCurso&id=<?php echo $r->getId(); ?>">Mostrar Alumnos</a>
                         </div>
                     </div>
     <?php endforeach; ?>
