@@ -80,8 +80,19 @@ class PersonaDAO extends BaseDAO {
      */
     public function add($persona) {
         try {
+            //Variable utilizada para comprobar que todas las operaciones salieron bien
+            $correcto = true;
+            $this->pdo->beginTransaction();
+
             $sql = "INSERT INTO personas(nombre, apellidos, correo) VALUES (?,?,?)";
-            $this->pdo->prepare($sql)->execute(array($persona->getNombre(), $persona->getApellidos(), $persona->getCorreo()));
+
+            //Execute devuelve true si todo fue correcto y false si hubo algún error, guardamos el resultado en una variable
+            $resultado = $this->pdo->prepare($sql)->execute(array($persona->getNombre(), $persona->getApellidos(), $persona->getCorreo()));
+
+            //En caso de que el resultado sea false indicamos que hubo un error
+            if (!$resultado) {
+                $correcto = false;
+            }
 
             //Obtenemos el id de la persona que acabamos de insertar
             $idPersona = $this->pdo->lastInsertId();
@@ -92,7 +103,10 @@ class PersonaDAO extends BaseDAO {
             $usuario = $persona->getUsuario();
 
             //Insetamos en la tabla usuarios los datos
-            $this->pdo->prepare($sql2)->execute(array($idPersona, $usuario->getNombreUsuario(), $usuario->getPassword(), $usuario->getRol()));
+            $resultado = $this->pdo->prepare($sql2)->execute(array($idPersona, $usuario->getNombreUsuario(), $usuario->getPassword(), $usuario->getRol()));
+            if (!$resultado) {
+                $correcto = false;
+            }
 
             //Comprobamos que el rol sea alumno
             if ($usuario->getRol() == 'alumno') {
@@ -100,9 +114,19 @@ class PersonaDAO extends BaseDAO {
                 if (count($persona->getCursos()) > 0) {
                     $sql3 = "INSERT INTO curso_alumno(alumno_id, curso_id) VALUES (?, ?)";
                     foreach ($persona->getCursos() as $cursoid) {
-                        $this->pdo->prepare($sql3)->execute(array($idPersona, $cursoid));
+                        $resultado = $this->pdo->prepare($sql3)->execute(array($idPersona, $cursoid));
+                        if (!$resultado) {
+                            $correcto = false;
+                        }
                     }
                 }
+            }
+            //Si todo fue bien hacemos el commit
+            if ($correcto) {
+                $this->pdo->commit();
+                //De lo contrario hacemos rollback
+            } else {
+                $this->pdo->rollback();
             }
         } catch (Exception $e) {
             die($e->getMessage());
@@ -116,15 +140,28 @@ class PersonaDAO extends BaseDAO {
      */
     public function update($persona) {
         try {
+            //Variable utilizada para comprobar que todas las operaciones salieron bien
+            $correcto = true;
+            $this->pdo->beginTransaction();
+
             $sql = "UPDATE personas SET nombre = ?, apellidos = ?, correo = ? WHERE id = ? ";
 
-            $this->pdo->prepare($sql)->execute(array($persona->getNombre(), $persona->getApellidos(), $persona->getCorreo(), $persona->getId()));
+            $resultado = $this->pdo->prepare($sql)->execute(array($persona->getNombre(), $persona->getApellidos(), $persona->getCorreo(), $persona->getId()));
+
+            //En caso de que el resultado sea false indicamos que hubo un error
+            if (!$resultado) {
+                $correcto = false;
+            }
 
             $sql2 = "UPDATE usuarios SET nombre_usuario = ?, rol = ? WHERE id = ? ";
 
             $usuario = $persona->getUsuario();
 
-            $this->pdo->prepare($sql2)->execute(array($usuario->getNombreUsuario(), $usuario->getRol(), $persona->getId()));
+            $resultado = $this->pdo->prepare($sql2)->execute(array($usuario->getNombreUsuario(), $usuario->getRol(), $persona->getId()));
+            //En caso de que el resultado sea false indicamos que hubo un error
+            if (!$resultado) {
+                $correcto = false;
+            }
 
             //Comprobamos que el rol sea alumno
             if ($usuario->getRol() == 'alumno') {
@@ -137,9 +174,19 @@ class PersonaDAO extends BaseDAO {
                     //Insertamos los nuevos cursos
                     $sql3 = "INSERT INTO curso_alumno(alumno_id, curso_id) VALUES (?, ?)";
                     foreach ($persona->getCursos() as $cursoid) {
-                        $this->pdo->prepare($sql3)->execute(array($persona->getId(), $cursoid));
+                        $resultado = $this->pdo->prepare($sql3)->execute(array($persona->getId(), $cursoid));
+                        if (!$resultado) {
+                            $correcto = false;
+                        }
                     }
                 }
+            }
+            //Si todo fue bien hacemos el commit
+            if ($correcto) {
+                $this->pdo->commit();
+                //De lo contrario hacemos rollback
+            } else {
+                $this->pdo->rollback();
             }
         } catch (Exception $e) {
             die($e->getMessage());
@@ -224,6 +271,7 @@ class PersonaDAO extends BaseDAO {
 
     //Método para obtener un listado de alumnos que asisten a un curso
     //Por parámetro recibe el id del curso
+
     /**
      * Método utilizado para obtener un listado de alumnos que asisten a un curso
      * 
